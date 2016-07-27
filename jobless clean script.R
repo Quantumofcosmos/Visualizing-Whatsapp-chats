@@ -75,11 +75,36 @@ chat$surname <- gsub(":$", "", chat$surname)
 #save(chat, file = "whatsapp_cleaned.Rdata")
 View(chat)
 
+#Visualizing stacked per day
 ggplot(chat, aes(x = time$mday, fill = name)) + 
-stat_count(position = "stack", show.legend = TRUE) + 
-ggtitle("Conversations per day") + ylab("# of messages") + 
-xlab("time") + 
-theme(plot.title = element_text(face = "italic"))+ 
-scale_x_continuous(breaks=seq(0,31,1))
+  stat_count(position = "stack", show.legend = TRUE) + 
+  ggtitle("Conversations per day") + ylab("# of messages") + 
+  xlab("time") + 
+  theme(plot.title = element_text(face = "italic"))+ 
+  scale_x_continuous(breaks=seq(0,31,1))
+
+#Visualizing dodged per day
+ggplot(chat, aes(x = time$mday, fill = name)) + 
+  stat_count(position = "dodge", show.legend = TRUE) + 
+  ggtitle("Conversations per day") + ylab("# of messages") + 
+  xlab("time") + 
+  theme(plot.title = element_text(face = "italic"))+ 
+  scale_x_continuous(breaks=seq(0,31,1))
+
+#Visualizing stacked per hour
+ggplot(chat, aes(x = time$hour, fill = name)) + 
+  stat_count(position = "stack", show.legend = TRUE) + 
+  ggtitle("Conversations per day") + ylab("# of messages") + 
+  xlab("time") + 
+  theme(plot.title = element_text(face = "italic"))+ 
+  scale_x_continuous(breaks=seq(0,23,1))
+
+#Visualizing dodged per hour
+ggplot(chat, aes(x = time$hour, fill = name)) + 
+  stat_count(position = "dodge", show.legend = TRUE) + 
+  ggtitle("Conversations per day") + ylab("# of messages") + 
+  xlab("time") + 
+  theme(plot.title = element_text(face = "italic"))+ 
+  scale_x_continuous(breaks=seq(0,23,1))
 
 cat("Done.")
