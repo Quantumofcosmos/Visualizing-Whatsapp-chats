@@ -1,7 +1,12 @@
 #This script works with a .csv version of the Whatsapp chatlog.
 #Use excel or a programm of your choice to separate the raw .txt file by spaces.
+#if using MS Excel open the program and open the text file of whatsapp chat into MS Excel
+#select delimited in first step of import wizard,select space and unselect tab in the second step
+#treating consecuitive delimiters as one can be done according to your preference
+#in third step general data format and finish importing
+#now save this imported file in csv format
 
-#Read data
+#Read data (change the directory for it to point to your csv file)
 chat <- read.csv("G:/R Resources/WhatsApp Chat with Jobless.csv", 
                  encoding="UTF-8", header=FALSE, na.strings="", stringsAsFactors=FALSE)
 
@@ -74,6 +79,9 @@ chat$surname <- gsub(":$", "", chat$surname)
 #Save R object for the visualization part
 #save(chat, file = "whatsapp_cleaned.Rdata")
 View(chat)
+
+#loading GGplot2 package
+library(ggplot2)
 
 #Visualizing stacked per day
 ggplot(chat, aes(x = time$mday, fill = name)) + 
